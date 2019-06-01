@@ -1,0 +1,43 @@
+# Data analysis and Visulization
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt
+from scipy import stats
+from collections import Counter
+
+# machine learning
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC, LinearSVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.model_selection import GridSearchCV, cross_val_score, StratifiedKFold, learning_curve
+# load train & test data from csv files 
+
+
+train_data = pd.read_csv("C:/Users/Lenovo/Desktop/train.csv")
+test_data= pd.read_csv("C:/Users/Lenovo/Desktop/test.csv")
+# combining the train and test data
+combine_data = pd.concat((train_data,test_data),axis = 0).reset_index(drop=True)
+combine_data.info()
+# Checking Categorical Data
+train_data.select_dtypes(include=['object']).columns
+# Checking Numerical Data
+train_data.select_dtypes(include=['int64','float64']).columns 
+# Visualize variables with bar plot
+combine_data.Sex.value_counts().plot(kind='bar')
+..............
+............
+...........
+# Logistic Regression
+
+log_reg = LogisticRegression()
+scores_log_reg = cross_val_score(log_reg, X_train, Y_train, scoring='accuracy',cv=10)
+log_reg.fit(X_train, Y_train)
+Y_pred = log_reg.predict(X_test)
+acc_log_reg = np.mean(scores_log_reg)
+acc_log_reg
